@@ -10,6 +10,7 @@ viewBox="0 0 3387 3387"
     .str1 {stroke:none;stroke-width:42.33}
     .str0 {stroke:#6666CC;stroke-width:42.33}
     .fil0 {fill:none}
+	.fil01 {opacity:0}
    ]]>
   </style>
  </defs>
@@ -53,15 +54,15 @@ viewBox="0 0 3387 3387"
    <path id="h0" class="fil0 str1" d="M76 262c664,274 511,268 1283,301 317,13 1702,164 1968,-21"/>
   </g>
   <g id="fields">
-   <rect id="f22" class="fil0" x="2239" y="2329" width="1016" height="1016"/>
-   <rect id="f21" class="fil0" x="1094" y="2371" width="1016" height="1016"/>
-   <rect id="f20" class="fil0" x="48" y="2376" width="1016" height="1016"/>
-   <rect id="f12" class="fil0" x="2300" y="1219" width="1016" height="1016"/>
-   <rect id="f11" class="fil0" x="1181" y="1194" width="1016" height="1016"/>
-   <rect id="f10" class="fil0" x="54" y="1191" width="1016" height="1016"/>
-   <rect id="f02" class="fil0" x="2328" y="93" width="1016" height="1016"/>
-   <rect id="f01" class="fil0" x="1202" y="68" width="1016" height="1016"/>
-   <rect id="f00" class="fil0" x="42" y="34" width="1016" height="1016"/>
+   <rect id="f22" class="fil01" x="2239" y="2329" width="1016" height="1016"/>
+   <rect id="f21" class="fil01" x="1094" y="2371" width="1016" height="1016"/>
+   <rect id="f20" class="fil01" x="48" y="2376" width="1016" height="1016"/>
+   <rect id="f12" class="fil01" x="2300" y="1219" width="1016" height="1016"/>
+   <rect id="f11" class="fil01" x="1181" y="1194" width="1016" height="1016"/>
+   <rect id="f10" class="fil01" x="54" y="1191" width="1016" height="1016"/>
+   <rect id="f02" class="fil01" x="2328" y="93" width="1016" height="1016"/>
+   <rect id="f01" class="fil01" x="1202" y="68" width="1016" height="1016"/>
+   <rect id="f00" class="fil01" x="42" y="34" width="1016" height="1016"/>
   </g>
  </g>
 </svg>
