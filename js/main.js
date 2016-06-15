@@ -4,8 +4,35 @@
 
 
 
-function isReady(f){/in/.test(document.readyState)?setTimeout('isReady('+f+')',9):f()};
+//function isReady(f){/in/.test(document.readyState)?setTimeout('isReady('+f+')',9):f()};
 
+document
+    .getElementById('boardImg')
+    .addEventListener('load', function() {
+        game();
+    });
+
+function game() {
+    var boardImg = document
+        .getElementById('boardImg')
+        .contentDocument;
+
+    // hidden buttons event listener
+    boardImg
+        .getElementById('fields')
+        .addEventListener('click', function (event) {
+            console.log(event.srcElement.id.slice(1));
+            showMove(boardImg, "x", event.srcElement.id.slice(1))
+        });
+
+    // new game event listener
+    document
+        .getElementById('newGame')
+        .addEventListener('click', function (event) {
+            reset(boardImg);
+        });
+}
+/*
 isReady(function(){
     // svg elements
     var boardImg = document
@@ -28,7 +55,7 @@ isReady(function(){
         });
 
 });
-
+*/
 function showMove(boardImg, type, index) {
     boardImg
         .getElementById(type + index)
