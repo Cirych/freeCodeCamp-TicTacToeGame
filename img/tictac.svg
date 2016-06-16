@@ -9,6 +9,7 @@ viewBox="0 0 3387 3387"
    <![CDATA[
     .str1 {stroke:none;stroke-width:42.33}
 	.showMove {stroke:black;stroke-width:42.33}
+	.showWon {stroke:red;stroke-width:42.33}
     .str0 {stroke:#6666CC;stroke-width:42.33}
     .fil0 {fill:none}
 	.fil01 {opacity:0}

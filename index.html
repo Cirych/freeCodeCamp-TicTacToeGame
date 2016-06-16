@@ -23,28 +23,21 @@
         <div class="header-container">
             <header class="wrapper clearfix">
                 <h1 class="title">Tic Tac Toe Game</h1>
-                <nav>
-                    <ul>
-                        <li><a href="#">nav ul li a</a></li>
-                        <li><a href="#">nav ul li a</a></li>
-                        <li><a href="#">nav ul li a</a></li>
-                    </ul>
-                </nav>
             </header>
         </div>
 
         <div class="main-container">
             <div class="main wrapper clearfix">
-                
+                <aside>
+                    <h3>Your choice: <span id="xselected" class="userSelection">X</span> or <span id="oselected" class="userSelection">O</span></h3>
+                    <h3 id="finalWinner"></h3>
+                    <p><button id="newGame">new game</button></p>
+                </aside>
                 <article>
                     <object id="boardImg" type="image/svg+xml" data="img/tictac.svg"></object>
                 </article>
 
-                <aside>
-                    <h3>Choice <span id="xselected" class="userSelection">X</span> or <span id="oselected" class="userSelection">O</span></h3>
-                    <p></p>
-                    <p><button id="newGame">new game</button></p>
-                </aside>
+                
 
             </div> <!-- #main -->
         </div> <!-- #main-container -->

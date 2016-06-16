@@ -24,6 +24,7 @@ document
 var config = {
     playerChoice: "o",
     computerChoice: "x",
+    timer: null
 }
 
 function init() {
@@ -42,7 +43,7 @@ function init() {
 }
 
 function game() {
-    config.state = 0;
+    config.state = false;
     config.board = [
         [0,0,0],
         [0,0,0],
@@ -51,6 +52,9 @@ function game() {
     function clickedSelection(event) {
         config.playerChoice = event.srcElement.id.charAt(0);
         config.computerChoice = (config.playerChoice=="o")?"x":"o";
+
+        config[config.playerChoice+'selected']
+            .classList.add('userSelected');
         
         config.xselected
             .removeEventListener('click', clickedSelection);
@@ -60,6 +64,11 @@ function game() {
         
         config.fields
             .addEventListener('click', clickedField);
+
+        document
+            .getElementById("newGame")
+            .style
+            .visibility = 'visible';
         
         computerFirst();
     };
@@ -79,32 +88,41 @@ function game() {
 function computerFirst() {
     config.board[1][1] = 1;
     showMove(config.computerChoice, 11);
-    config.state = 2;
+    config.state = true;
 };
 
 function computer() {
     minimax(0, 1);
     placeMove(config.computersMove[0], config.computersMove[1], 1);
     showMove(config.computerChoice, config.computersMove[0].toString() + config.computersMove[1].toString());
-    if (won(1)) {final(1); return;};
+    var won = win(1);
+    if (won) {final(1, won); return;};
     if(!freeFields()) {final(0); return;};
 };
 
 function human(choice) {
-    if(config.state!=2) return;
+    if(!config.state) return;
     var row = choice.charAt(0), col = choice.charAt(1);
     if(!config.board[row][col]) {
         placeMove(row, col, 2)
         showMove(config.playerChoice, choice);
-        if (won(2)) {final(2); return;};
+        var won = win(2);
+        if (won) {final(2, won); return;};
         if(!freeFields()) {final(0); return;};
         computer();
     }
 };
 // the end
-function final(result) {
-    config.state=0;
-    console.log(result);
+function final(result, won) {
+    config.state = false;
+    if(won) {
+        showWon(won);
+    }
+    document
+        .getElementById('finalWinner')
+        .innerText = !result?"It's a draw": result==1?"Computer won!":"You won!";
+
+    config.timer = setTimeout(reset, 5000);
 }
 
 function placeMove(row, col, player) {
@@ -117,9 +135,15 @@ function showMove(type, index) {
         .classList.add('showMove');
 };
 
+function showWon(index) {
+    config.boardImg
+        .getElementById(index)
+        .classList.add('showWon');
+};
+
 function minimax(depth, turn) {
-    if(won(1)) return +1;
-    if(won(2)) return -1;
+    if(win(1)) return +1;
+    if(win(2)) return -1;
 
     var freefields = freeFields();
     if(!freefields) return 0;
@@ -161,7 +185,7 @@ function freeFields() {
     return counter;
 }
 
-function won(player) {
+function won1(player) {
     if((config.board[0][0] == config.board[1][1] &&
         config.board[0][0] == config.board[2][2] &&
         config.board[0][0] == player) ||
@@ -182,21 +206,57 @@ function won(player) {
     return false;
 }
 
+function win(player) {
+    if( config.board[0][0] == config.board[1][1] &&
+        config.board[0][0] == config.board[2][2] &&
+        config.board[0][0] == player) return "d0022";
+    if( config.board[0][2] == config.board[1][1] &&
+        config.board[0][2] == config.board[2][0] &&
+        config.board[0][2] == player) return "d0220";
+
+    for(var i = 0; i<3; i++) {
+        if( config.board[i][0] == config.board[i][1] &&
+            config.board[i][0] == config.board[i][2] &&
+            config.board[i][0] == player) return "h"+i;
+        if( config.board[0][i] == config.board[1][i] &&
+            config.board[0][i] == config.board[2][i] &&
+            config.board[0][i] == player) return "v"+i;
+    }
+
+    return false;
+}
+
 function reset() {
+    if (config.timer) {
+        clearTimeout(config.timer);
+        config.timer = null;
+    }
     Array.prototype.slice.call(
         config.boardImg
         .getElementById('tictacs')
         .children
-    ).concat(
+    ).forEach(function (item) {
+            item.classList.remove('showMove');
+        });
     Array.prototype.slice.call(
         config.boardImg
         .getElementById('wins')
         .children
-    ))
-        .forEach(function (item) {
-            item.classList.remove('showMove');
+    ).forEach(function (item) {
+            item.classList.remove('showWon');
         });
-        
 
+    config[config.playerChoice+'selected']
+            .classList.remove('userSelected');
+
+    document
+        .getElementById('finalWinner')
+        .innerText = "";
+
+    document
+            .getElementById("newGame")
+            .style
+            .visibility = 'hidden';
+        
     game();
 };

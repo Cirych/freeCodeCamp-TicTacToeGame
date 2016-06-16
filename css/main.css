@@ -159,7 +159,14 @@ nav a:hover {
 background-color: grey;
 }
 
+.userSelected {
+background-color: red;
+}
 
+#newGame {
+    color: black;
+    visibility: hidden;
+}
 
 
 
